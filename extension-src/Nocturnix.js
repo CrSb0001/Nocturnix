@@ -61,13 +61,13 @@ class RandomUtils {
     
     let res = "";
     for(let i = 0; i < bits; i++) {
-      res += Math.floor(Math.random() * 2).toString()
+      res += Math.floor(Math.random() * 2).toString();
     }
     
     if (retType == __TO_STRING__) return res;
     if (retType == __TO_NUMBER__) return Number("0b" + res).toString;
     else {
-      throw new UnidentifiedOptionError("retType should either be __TO_STRING__ or __TO_NUMBER__.")
+      throw new UnidentifiedOptionError("retType should either be __TO_STRING__ or __TO_NUMBER__.");
     }
   }
 }
