@@ -75,6 +75,7 @@ class CameraHelper {
   constructor(isOpen, lastCamActive, currentCam) {
     this.isOpen = isOpen;
     this.lastCamActive = lastCamActive;
+    this.currentCam = currentCam;
   }
   
   static closeCameras() {
