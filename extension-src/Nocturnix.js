@@ -18,7 +18,9 @@ if someone wants to modify the project and add new functions, or add new depende
 */
 const __TO_NUMBER__ = 0x00;
 const __TO_STRING__ = 0x01;
-const __DEFAULT_CAM__ = "1";
+
+let __DEFAULT_CAM__ = "1";
+let __REGISTERED_CAMERAS__ = [];
 
 class UnidentifiedOptionError extends Error {
   constructor(msg) {
@@ -26,6 +28,8 @@ class UnidentifiedOptionError extends Error {
     this.name = this.constructor.name;
   }
 }
+
+class CameraNotFoundError extends UnidentifiedOptionError {}
 
 class UnsandboxedError extends Error {
   constructor(msg) {
@@ -76,6 +80,15 @@ class CameraHelper {
     this.isOpen = isOpen;
     this.lastCamActive = lastCamActive;
     this.currentCam = currentCam;
+  }
+  
+  static registerCamera(camera) {
+    __REGISTERED_CAMERAS__ += [camera]
+  }
+  
+  static registerDefaultCamera(camera) {
+    if (!__REGISTERED_CAMERAS__.includes(camera)) throw new CameraNotFoundError(`Camera ${camera} not found`);
+    else __DEFAULT_CAM__ = camera;
   }
   
   static closeCameras() {
